@@ -1,15 +1,17 @@
 #!/bin/bash
 
-set -ouex pipefail
-
-### Install NVIDIA drivers using RPM Fusion (ubule base images include repos)
-
-dnf5 install -y \
+$PACKAGES = \
   akmod-nvidia \
   xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia \
   xorg-x11-drv-nvidia-libs.i686 \
   mokutil
+
+set -ouex pipefail
+
+### Install NVIDIA drivers using RPM Fusion
+
+dnf5 install -y $PACKAGES
 
 # The uBlue build environment already includes the uBlue MOK key:
 # /etc/pki/akmods/certs/akmods-ublue.der (public key)
