@@ -1,4 +1,4 @@
-export image_name := env("gondolin", "gondolin") # output image name, usually same as repo name, change as needed
+export image_name := env("gondolin", "image-template") # output image name, usually same as repo name, change as needed
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
 
