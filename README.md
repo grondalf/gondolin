@@ -11,9 +11,6 @@ If you have questions about this template after following the instructions, try 
 
 # How to Use
 
-To get started on your first bootc image, simply read and follow the steps in the next few headings.
-If you prefer instructions in video form, TesterTech created an excellent tutorial, embedded below.
-
 [![Video Tutorial](https://img.youtube.com/vi/IxBl11Zmq5w/0.jpg)](https://www.youtube.com/watch?v=IxBl11Zmq5wE)
 
 ## Step 0: Prerequisites
@@ -27,23 +24,17 @@ These steps assume you have the following:
 
 ### Step 1a: Copying the Template
 
-Select `Use this Template` on this page. You can set the name and description of your repository to whatever you would like, but all other settings should be left untouched.
+Select `Use this Template` on this page. You can set the name and description of your repository, but all other settings should be left untouched.
 
-Once you have finished copying the template, you need to enable the Github Actions workflows for your new repository.
-To enable the workflows, go to the `Actions` tab of the new repository and click the button to enable workflows.
+To enable Github Actions workflows, go to the `Actions` tab of the new repository and click the button to enable workflows.
 
 ### Step 1b: Cloning the New Repository
 
-Here I will defer to the much superior GitHub documentation on the matter. You can use whichever method is easiest.
 [GitHub Documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-
-Once you have the repository on your local drive, proceed to the next step.
 
 ## Step 2: Initial Setup
 
 ### Step 2a: Creating a Cosign Key
-
-Container signing is important for end-user security and is enabled on all Universal Blue images. By default the image builds *will fail* if you don't.
 
 First, install the [cosign CLI tool](https://edu.chainguard.dev/open-source/sigstore/cosign/how-to-install-cosign/#installing-cosign-with-the-cosign-binary)
 With the cosign tool installed, run inside your repo folder:
