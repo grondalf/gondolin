@@ -2,23 +2,32 @@
 
 set -ouex pipefail
 
-### Install packages
+### Install NVIDIA drivers using RPM Fusion (ubule base images include repos)
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
+dnf5 install -y \
+  akmod-nvidia \
+  xorg-x11-drv-nvidia-cuda \
+  xorg-x11-drv-nvidia \
+  xorg-x11-drv-nvidia-libs.i686 \
+  mokutil
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
+# The uBlue build environment already includes the uBlue MOK key:
+# /etc/pki/akmods/certs/akmods-ublue.der (public key)
+# The modules will be signed automatically with the matching uBlue private key
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# Add a helper script or instruction so users can enroll the uBlue MOK key if Secure Boot is enabled:
+cat << 'EOF' > /etc/profile.d/enroll-mok.sh
+if command -v mokutil &>/dev/null; then
+    if mokutil --sb-state | grep -iq enabled; then
+        echo "Secure Boot is enabled."
+        echo "If NVIDIA drivers fail to load, enroll the uBlue MOK key:"
+        echo "sudo mokutil --import /etc/pki/akmods/certs/akmods-ublue.der"
+        echo "Then reboot and follow on-screen instructions to complete enrollment."
+    fi
+fi
+EOF
 
-#### Example for enabling a System Unit File
+chmod +x /etc/profile.d/enroll-mok.sh
 
-systemctl enable podman.socket
+# Enable podman socket as example (optional)
+# systemctl enable podman.socket
