@@ -20,7 +20,7 @@ set -ouex pipefail
 # dnf5 -y copr disable ublue-os/staging
 
 # Install the propietary NVIDIA drivers:
-dnf5 -y install akmod-nvidia xorg-x11-drv-nvidia-cuda
+dnf5 install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
 
 #### Example for enabling a System Unit File
 systemctl enable podman.socket
