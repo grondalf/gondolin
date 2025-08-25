@@ -2,22 +2,6 @@
 
 set -ouex pipefail
 
-# Get full absolute directory of the current script
-SCRIPT_PATH=$(readlink -f "$0")
-SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
-
-# Specify the path to packages.list
-PACKAGES_LIST="$SCRIPT_DIR/build_files/packages.list"
-
-# Check if the file exists before reading
-if [[ ! -f "$PACKAGES_LIST" ]]; then
-  echo "Error: packages.list not found at $PACKAGES_LIST"
-  exit 1
-fi
-
-# Read packages from the file
-PACKAGES=$(cat "$PACKAGES_LIST")
-
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
@@ -36,7 +20,7 @@ PACKAGES=$(cat "$PACKAGES_LIST")
 # dnf5 -y copr disable ublue-os/staging
 
 # Install the propietary NVIDIA drivers:
-dnf5 install -y $PACKAGES
+dnf5 install -y akmod-nvidia xorg-x11-drv-nvidia-cuda intel-undervolt steam-devices papirus-icon-theme
 
 #### Example for enabling a System Unit File
 systemctl enable podman.socket
