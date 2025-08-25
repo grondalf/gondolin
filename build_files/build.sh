@@ -20,7 +20,16 @@ set -ouex pipefail
 # dnf5 -y copr disable ublue-os/staging
 
 # Install the propietary NVIDIA drivers:
-dnf5 install -y akmod-nvidia xorg-x11-drv-nvidia-cuda intel-undervolt steam-devices papirus-icon-theme
+dnf5 install -y \
+	https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
+	https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+  
+dnf5 install -y \
+	akmod-nvidia \
+	xorg-x11-drv-nvidia-cuda \
+	intel-undervolt \
+	steam-devices \
+	papirus-icon-theme
 
 #### Example for enabling a System Unit File
 systemctl enable podman.socket
