@@ -2,10 +2,20 @@
 
 set -ouex pipefail
 
-# Specify the path to packages.list:
-PACKAGES_LIST="/build_files/packages.list"
+# Get full absolute directory of the current script
+SCRIPT_PATH=$(readlink -f "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
-# Read packages from separate file
+# Specify the path to packages.list
+PACKAGES_LIST="$SCRIPT_DIR/build_files/packages.list"
+
+# Check if the file exists before reading
+if [[ ! -f "$PACKAGES_LIST" ]]; then
+  echo "Error: packages.list not found at $PACKAGES_LIST"
+  exit 1
+fi
+
+# Read packages from the file
 PACKAGES=$(cat "$PACKAGES_LIST")
 
 ### Install packages
