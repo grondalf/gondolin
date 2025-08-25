@@ -2,8 +2,14 @@
 
 set -ouex pipefail
 
+# Get the directory of the current script:
+SCRIPT_DIR=$(dirname "$0")
+
+# Specify the path to packages.list:
+PACKAGES_LIST="$SCRIPT_DIR/build_files/packages.list"
+
 # Read packages from separate file
-PACKAGES=$(cat packages.list)
+PACKAGES=$(cat "$PACKAGES_LIST")
 
 ### Install packages
 
