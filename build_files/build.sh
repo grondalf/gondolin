@@ -2,6 +2,9 @@
 
 set -ouex pipefail
 
+# Read packages from separate file
+PACKAGES=$(cat packages.list)
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
@@ -20,7 +23,7 @@ set -ouex pipefail
 # dnf5 -y copr disable ublue-os/staging
 
 # Install the propietary NVIDIA drivers:
-dnf5 install -y akmod-nvidia xorg-x11-drv-nvidia-cuda
+dnf5 install -y $PACKAGES
 
 #### Example for enabling a System Unit File
 systemctl enable podman.socket
